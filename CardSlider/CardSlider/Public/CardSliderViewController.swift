@@ -4,13 +4,13 @@ import UIKit
 /// Model for a card.
 public protocol CardSliderItem {
 	/// The image for the card.
-	var image: UIImage { get }
+	var image: UIImage? { get }
 	
 	/// Rating from 0 to 5. If set to nil, rating view will not be displayed for the card.
 	var rating: Int? { get }
 	
 	/// Will be displayed in the title view below the card.
-	var title: String { get }
+	var title: String? { get }
 	
 	/// Will be displayed under the main title for the card.
 	var subtitle: String? { get }
@@ -54,7 +54,12 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 	/// - Parameter dataSource: CardSliderDataSource
 	
 	public static func with(dataSource: CardSliderDataSource) -> CardSliderViewController {
-        guard let controller = UIStoryboard(name: "Main", bundle: Bundle(for: BundleToken.self)).instantiateInitialViewController() as? CardSliderViewController else {
+//        guard let controller = UIStoryboard(name: "Main", bundle: Bundle(for: BundleToken.self)).instantiateInitialViewController() as? CardSliderViewController else {
+        
+        var path = Bundle(for: self).path(forResource: "CardSlider", ofType: "bundle")
+        let realBundle = Bundle(path: path!)
+
+        guard let controller = UIStoryboard(name: "Main", bundle: realBundle).instantiateInitialViewController() as? CardSliderViewController else {
 			fatalError("Failed to initialize CardSliderViewController")
 		}
 		controller.dataSource = dataSource
