@@ -47,7 +47,10 @@ open class CardSliderViewController: UIViewController, UIScrollViewDelegate {
 	private weak var openCardCell: UICollectionViewCell?
 	private var animator: UIViewPropertyAnimator?
 	private let cellID = "CardCell"
-	
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 	
 	/// Instantiate CardSliderViewController.
 	///
